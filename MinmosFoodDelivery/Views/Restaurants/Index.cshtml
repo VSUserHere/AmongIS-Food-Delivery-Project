@@ -1,0 +1,148 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model IEnumerable<MinmosFoodDelivery.Models.Restaurant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/joints.css" />
+
+    <script src="~/js/cart.js"></script>
+</head>
+
+<body>
+    @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+    {
+        <h1 id="title">Food Joints</h1>
+        <h5 id="info"> Hover above a joint for the menu.</h5>
+        <div id="create">
+            <a asp-action="Create">Create New</a>
+        </div>
+        <br />
+    }
+    else if (!SignInManager.IsSignedIn(User))
+    {
+        <h1 id="title">Food Joints</h1>
+        <h5 id="info"> Hover above a joint for the menu.</h5>
+        <h6 id="login-warning"> Login to purchase.</h6>
+        <br />
+    }
+    else
+    {
+        <h1 id="title">Food Joints</h1>
+        <h5 id="info"> Hover above a joint for the menu.</h5>
+        <br />
+    }
+
+    <div class="menu">
+        @foreach (var item in Model)
+        {
+            <div class="item">
+                <div class="item-wrap box-shadow">
+                    <div class="item-front" id="@item.RestaurantId.ToString()">
+                        <div>
+                            <h2 id="name">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </h2>
+                            <h5>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </h5>
+                        </div>
+                        <div class="item-image">
+                            <img src="~/css/Resources/joint.svg" alt="joint" />
+                        </div>
+                    </div>
+                    <div class="item-back">
+                        @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+                        {
+                            <div class="item-list-admin">
+                                @foreach (var product in item.Products)
+                                {
+                                    <h5 id="name"> @product.Name</h5>
+                                    <h5 id="price"> @product.Price $</h5>
+                                    <div class="allergens">
+                                        @foreach (var allergen in product.Allergens)
+                                        {
+                                            <h6> @allergen.Name</h6>
+                                        }
+                                    </div>
+                                }
+                            </div>
+
+                            <div id="permissions">
+                                <div class="border-top"></div>
+                                <div id="permissions-edit">
+                                    <a asp-action="Edit" asp-route-id="@item.RestaurantId">Edit</a>
+                                </div>
+                                <div id="permissions-delete">
+                                    <a asp-action="Delete" asp-route-id="@item.RestaurantId">Delete</a>
+                                </div>
+                                <div id="permissions-create">
+                                    <a asp-controller="Products" asp-action="Create">Create Product</a>
+                                </div>
+                            </div>
+
+                        }
+                        else if (!SignInManager.IsSignedIn(User))
+                        {
+                            <div class="item-list-normal">
+                                <a class="nav-link text-dark box-shadow" id="login" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Login</a>
+
+                                @foreach (var product in item.Products)
+                                {
+                                    <h5 id="name"> @product.Name</h5>
+                                    <h5 id="price"> @product.Price $</h5>
+                                    <div class="allergens">
+                                        @foreach (var allergen in product.Allergens)
+                                        {
+                                            <h6> @allergen.Name</h6>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item-list-normal">
+                                @foreach (var product in item.Products)
+                                {
+                                    <h5 id="name"> @product.Name</h5>
+                                    <h5 id="price"> @product.Price $</h5>
+
+                                    <div class="allergens">
+                                        @foreach (var allergen in product.Allergens)
+                                        {
+                                            <h6> @allergen.Name</h6>
+                                        }
+                                    </div>
+                                    <a class="nav-link text-dark box-shadow" id="buy" onclick="action.toggle('@product.Name',@product.Price)">Add</a>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    @if (SignInManager.IsSignedIn(User) && !User.Identity.Name.Contains("xelo"))
+    {
+        <div class="cart box-shadow" id="cart-toggle">
+            <h2 id="user-order">@User.Identity.Name.Substring(0, User.Identity.Name.IndexOf('@'))'s Order</h2>
+            <p id="product"></p>
+            <p id="total"></p>
+            <div id="order">
+                <a class="nav-link text-dark box-shadow" id="order-products">Order</a>
+            </div>
+
+        </div>
+    }
+    else { }
+
+</body>
+
+

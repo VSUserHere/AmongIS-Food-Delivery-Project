@@ -1,0 +1,10 @@
+﻿body {
+    background-color: #FBD148;
+}
+
+#about {
+    font-size: 72px;
+    font-weight: bolder;
+    font-variant-caps: all-petite-caps;
+    font-style: oblique;
+}

@@ -1,0 +1,240 @@
+﻿body {
+    background-color: #FBD148;
+    font-weight: bold;
+    font-style: oblique;
+    font-variant-caps: all-small-caps;
+    user-select: none;
+}
+
+/*::selection {
+    background: #A2D2FF;
+}*/
+
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px;
+}
+
+/*menu*/
+.menu {
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    height: 400px;
+    width: 100%;
+}
+
+#title {
+    font-weight: bolder;
+    font-style: oblique;
+    font-size: 72px;
+    font-variant-caps: all-small-caps;
+}
+
+/* main card div */
+
+.item {
+    background-color: transparent;
+    border-radius: 20px;
+    position: relative;
+    perspective: 500px;
+    font-weight: bold;
+    font-style: oblique;
+    font-variant-caps: all-small-caps;
+    /*margin-right: 25px;*/
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    height: 100%;
+    width: 350px;
+    padding: 10px;
+}
+
+
+/* card wrapper: nests card front/back, resolves animation jitter/flicker */
+
+.item-wrap {
+    background-color: transparent;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: 0.75s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform-style: preserve-3d;
+    align-content: center;
+}
+
+
+/* card animation on hover */
+
+.item:hover .item-wrap {
+    transform: rotateY(180deg);
+    cursor: pointer;
+}
+
+/* card front/back */
+
+.item-front,
+.item-back {
+    background-color: white;
+    border-radius: 20px;
+    position: absolute;
+    padding: 25px;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    justify-self: center;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+}
+
+.item-list-normal {
+    height: 100%;
+    overflow: auto;
+}
+
+.item-list-admin {
+    height: 245px;
+    overflow: auto;
+}
+
+.item-back {
+    transform: rotateY(180deg);
+    text-align: center;
+    font-size: 20px;
+    justify-content: center;
+    align-content: center;
+    background-color: #1F1D36;
+    color: white;
+}
+
+.item-image {
+    width: 75%;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 25px;
+}
+
+#name {
+    width: 100%;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.allergens h6 {
+    list-style: none;
+    text-align: center;
+    position: relative;
+    color: red;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+#name, #price {
+    font-weight: bolder;
+}
+
+#price {
+    color: greenyellow;
+}
+
+@keyframes hue-shift {
+    0% {
+        background-color: white;
+    }
+
+    50% {
+        background-color: #A2D2FF;
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
+#login, #buy, #order-products {
+    /* animation: hue-shift 2s ease-in-out infinite;*/
+    background-color: #A2D2FF;
+    border-radius: 20px;
+    width: 75%;
+    text-align: center;
+    margin-bottom: 15px;
+    margin-left: 18px;
+    text-decoration: none;
+}
+
+#buy {
+    width: 50%;
+    margin-left: 35px;
+}
+
+/*cart*/
+
+.cart {
+    display: list-item;
+    list-style: none;
+    padding: 10px;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    border-radius: 20px;
+    background: white;
+    height: 250px;
+    width: 100%;
+    visibility: hidden;
+}
+
+#product {
+    display: inline-flex;
+    overflow: auto;
+}
+
+#order {
+    width: 25%;
+    display: block;
+    position: relative;
+    margin: auto;
+}
+
+#user-order {
+    font-weight: bolder;
+}
+
+#total {
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+#create {
+    font-size: 24px;
+    transition: .25s ease-in-out;
+}
+
+    #create:hover {
+        color: white;
+    }
+
+#permissions {
+    margin-bottom: 25px;
+}
+
+#permissions-edit,
+#permissions-delete,
+#permissions-create {
+    transition: .25s ease-in-out;
+    color: #A2D2FF;
+    font-size: 20px;
+}
+
+    #permissions-edit:hover,
+    #permissions-delete:hover,
+    #permissions-create:hover {
+        color: white;
+    }
+
+.border-top {
+    border-top: 3px solid white !important;
+    height: 1px;
+    margin-top: 10px;
+    border-radius: 100%;
+}
