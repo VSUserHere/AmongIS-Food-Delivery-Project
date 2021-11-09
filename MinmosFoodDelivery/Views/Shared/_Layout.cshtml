@@ -7,9 +7,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MinmosFoodDelivery</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewData["Title"]</title>
 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="icon" href="/css/Resources/joint.svg">
     <link rel="stylesheet" href="~/css/site.css" />
     <link type="text/css" rel="stylesheet" href="~/css/style.css" />
 
@@ -31,12 +32,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @*@if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
-                            {*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Restaurants" asp-action="Index">Food Joints</a>
                         </li>
-                        @*}*@
+                        @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="All">Orders</a>
+                            </li>
+                        }
+                        else @if (SignInManager.IsSignedIn(User) && !User.Identity.Name.Contains("xelo"))
+                   {
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">@User.Identity.Name.Substring(0, User.Identity.Name.IndexOf('@'))'s Orders</a>
+                    </li>
+                }
+                else
+                {
+
+                }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
                         </li>

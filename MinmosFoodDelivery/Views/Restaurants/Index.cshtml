@@ -5,7 +5,7 @@
 @model IEnumerable<MinmosFoodDelivery.Models.Restaurant>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Food Joints";
 }
 
 <head>
@@ -94,8 +94,8 @@
 
                                 @foreach (var product in item.Products)
                                 {
-                                    <h5 id="name"> @product.Name</h5>
-                                    <h5 id="price"> @product.Price $</h5>
+                                    <h5 id="name">@product.Name</h5>
+                                    <h5 id="price">@product.Price $</h5>
                                     <div class="allergens">
                                         @foreach (var allergen in product.Allergens)
                                         {
@@ -110,8 +110,12 @@
                             <div class="item-list-normal">
                                 @foreach (var product in item.Products)
                                 {
-                                    <h5 id="name"> @product.Name</h5>
-                                    <h5 id="price"> @product.Price $</h5>
+                                    <div id="name" class="hover-underline-animation">
+                                        <a class="nav-link" id="buy" onclick="action.toggle('@product.ProductId','@product.Name','@product.Price')">
+                                            @product.Name
+                                        </a>
+                                    </div>
+                                    <div id="price">@product.Price $</div>
 
                                     <div class="allergens">
                                         @foreach (var allergen in product.Allergens)
@@ -119,7 +123,10 @@
                                             <h6> @allergen.Name</h6>
                                         }
                                     </div>
-                                    <a class="nav-link text-dark box-shadow" id="buy" onclick="action.toggle('@product.Name',@product.Price)">Add</a>
+
+                                    <div class="product-buttons">
+                                        <div class="nav-link hover-underline-animation-remove remove" id="remove-product-@product.ProductId" style="visibility:hidden" onclick="action.removeProduct('@product.ProductId','@product.Name','@product.Price')"></div>
+                                    </div>
                                 }
                             </div>
                         }
@@ -132,11 +139,16 @@
     @if (SignInManager.IsSignedIn(User) && !User.Identity.Name.Contains("xelo"))
     {
         <div class="cart box-shadow" id="cart-toggle">
-            <h2 id="user-order">@User.Identity.Name.Substring(0, User.Identity.Name.IndexOf('@'))'s Order</h2>
-            <p id="product"></p>
-            <p id="total"></p>
+            <div id="order-title">
+                <h2 id="user-order">@User.Identity.Name.Substring(0, User.Identity.Name.IndexOf('@'))</h2>
+                <h2 id="subtitle-user-order">'s Shopping Cart</h2>
+            </div>
+
+            <div id="products">Cart Is Empty :(</div>
+
             <div id="order">
-                <a class="nav-link text-dark box-shadow" id="order-products">Order</a>
+                <h5 id="total">0 $</h5>
+                <a class="nav-link text-dark box-shadow" id="order-products" onclick="action.addOrder()">Order</a>
             </div>
 
         </div>

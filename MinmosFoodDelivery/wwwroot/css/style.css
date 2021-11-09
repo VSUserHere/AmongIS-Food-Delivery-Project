@@ -17,7 +17,7 @@
     background: white;
 }
 
-.navbar-brand, .navbar-nav {
+.navbar-brand, .navbar-nav, #logout {
     font-weight: bold;
     font-style: oblique;
     font-variant-caps: all-petite-caps;

@@ -97,10 +97,6 @@ namespace MinmosFoodDelivery.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -152,8 +148,6 @@ namespace MinmosFoodDelivery.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -268,15 +262,12 @@ namespace MinmosFoodDelivery.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -335,16 +326,6 @@ namespace MinmosFoodDelivery.Migrations
                     b.HasIndex("ProductsProductId");
 
                     b.ToTable("OrderProduct");
-                });
-
-            modelBuilder.Entity("MinmosFoodDelivery.Models.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("AllergenProduct", b =>
@@ -415,9 +396,9 @@ namespace MinmosFoodDelivery.Migrations
 
             modelBuilder.Entity("MinmosFoodDelivery.Models.Order", b =>
                 {
-                    b.HasOne("MinmosFoodDelivery.Models.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId1");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -451,11 +432,6 @@ namespace MinmosFoodDelivery.Migrations
             modelBuilder.Entity("MinmosFoodDelivery.Models.Restaurant", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("MinmosFoodDelivery.Models.User", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

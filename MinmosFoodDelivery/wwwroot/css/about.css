@@ -8,3 +8,44 @@
     font-variant-caps: all-petite-caps;
     font-style: oblique;
 }
+
+ul, ol {
+    list-style: none;
+}
+
+#story,
+#contact,
+#offer {
+    font-weight: bold;
+    font-style: oblique;
+    font-variant-caps: all-petite-caps;
+    border-radius: 20px;
+}
+
+#story,
+#story-content {
+    text-align: left;
+}
+
+#offer,
+#offer-content {
+    text-align: center;
+    font-style: oblique;
+}
+
+#contact, #contact-content {
+    text-align: right;
+}
+
+li {
+    text-align: right;
+    font-style: oblique;
+}
+
+#story-content,
+#contact-content {
+    height: 100px;
+    width: 500px;
+    justify-self: center;
+    font-style: oblique;   
+}

@@ -10,18 +10,25 @@
     background: #A2D2FF;
 }*/
 
+::-webkit-scrollbar-track {
+    border-radius: 100%;
+}
+
 ::-webkit-scrollbar-thumb {
     background: white;
-    border-radius: 10px;
+    border-radius: 100%;
 }
 
 /*menu*/
 .menu {
     display: flex;
     justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    align-self: center;
     border-radius: 20px;
     height: 400px;
-    width: 100%;
+    width: 1150px;
 }
 
 #title {
@@ -41,12 +48,14 @@
     font-weight: bold;
     font-style: oblique;
     font-variant-caps: all-small-caps;
-    /*margin-right: 25px;*/
     text-align: center;
     align-content: center;
     align-items: center;
+    justify-content: center;
+    justify-items: center;
     height: 100%;
-    width: 350px;
+    /*width: 350px;*/
+    width: 100%;
     padding: 10px;
 }
 
@@ -68,7 +77,6 @@
 
 .item:hover .item-wrap {
     transform: rotateY(180deg);
-    cursor: pointer;
 }
 
 /* card front/back */
@@ -117,6 +125,7 @@
 
 #name {
     width: 100%;
+    font-size: 24px;
     text-align: center;
     font-weight: bolder;
 }
@@ -125,16 +134,17 @@
     list-style: none;
     text-align: center;
     position: relative;
-    color: red;
+    color: #A2D2FF;
     font-size: 18px;
     font-weight: bolder;
 }
 
-#name, #price {
+#name, #price, #total {
     font-weight: bolder;
 }
 
 #price {
+    font-size: 24px;
     color: greenyellow;
 }
 
@@ -152,26 +162,52 @@
     }
 }
 
-#login, #buy, #order-products {
+#login, #buy, #order-products, .remove-product {
     /* animation: hue-shift 2s ease-in-out infinite;*/
     background-color: #A2D2FF;
     border-radius: 20px;
     width: 75%;
     text-align: center;
     margin-bottom: 15px;
-    margin-left: 18px;
+    margin-left: 30px;
     text-decoration: none;
+    cursor: pointer;
 }
 
-#buy {
-    width: 50%;
-    margin-left: 35px;
+#name #buy {
+    color: white;
+    background-color: transparent;
+}
+
+.remove-product {
+    color: mediumvioletred;
+    background-color: transparent;
+}
+
+#login {
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+#buy, .remove-product {
+    margin: 0px;
+    margin-bottom: 10px;
+    padding: 0px;
+    width: 100%;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.remove-product {
+    margin-right: 25px;
 }
 
 /*cart*/
 
 .cart {
-    display: list-item;
+    display: grid;
     list-style: none;
     padding: 10px;
     justify-content: center;
@@ -180,29 +216,51 @@
     border-radius: 20px;
     background: white;
     height: 250px;
-    width: 100%;
+    width: 1150px;
     visibility: hidden;
+    transition: .5s ease-in-out;
 }
 
-#product {
-    display: inline-flex;
+#products {
+    font-size: 20px;
+    height: 75px;
+    width: 100%;
+    justify-self: center;
     overflow: auto;
+    margin-bottom: 50px;
 }
 
 #order {
     width: 25%;
     display: block;
-    position: relative;
+    position: absolute;
     margin: auto;
+    bottom: 0;
+    text-align: center;
+    justify-self: center;
+    justify-content: center;
+    justify-items: center;
+    cursor: pointer;
 }
 
-#user-order {
+#order-title {
+    display: inline-flex;
+    position: absolute;
+    justify-self: center;
+    padding-top: 10px;
+}
+
+#user-order, #subtitle-user-order {
     font-weight: bolder;
+    display: inline-flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
 }
 
 #total {
-    font-weight: bolder;
-    font-size: 24px;
+    font-size: 28px;
 }
 
 #create {
@@ -213,6 +271,17 @@
     #create:hover {
         color: white;
     }
+
+.product-buttons {
+    display: inline-block;
+    margin: auto;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+}
 
 #permissions {
     margin-bottom: 25px;
@@ -238,3 +307,42 @@
     margin-top: 10px;
     border-radius: 100%;
 }
+
+.hover-underline-animation,
+.hover-underline-animation-remove {
+    display: inline-block;
+    position: relative;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.hover-underline-animation-remove {
+    color: darkorange;
+}
+
+    .hover-underline-animation:after,
+    .hover-underline-animation-remove:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 4px;
+        border-radius: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        background-color: white;
+        transform-origin: center;
+        transition: transform 0.25s ease-out;
+    }
+
+    .hover-underline-animation-remove:after {
+        background-color: darkorange;
+    }
+
+    .hover-underline-animation:hover:after,
+    .hover-underline-animation-remove:hover:after {
+        transform: scaleX(0.75);
+        transform-origin: center;
+    }
