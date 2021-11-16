@@ -23,14 +23,18 @@ namespace MinmosFoodDelivery.Controllers
         // GET: Orders
         public async Task<IActionResult> All()
         {
-            var appDbContext = _context.Orders.Include(o => o.User);
+            var appDbContext = _context.Orders
+                .Include(u => u.User)
+                .Include(p => p.Products);
             return View(await appDbContext.ToListAsync());
         }
 
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Orders.Include(o => o.User)
+            var appDbContext = _context.Orders
+                .Include(u => u.User)
+                .Include(o => o.Products)
                 .Where(o => o.UserId == User.Identity.GetUserId());
             return View(await appDbContext.ToListAsync());
         }
@@ -63,15 +67,15 @@ namespace MinmosFoodDelivery.Controllers
             return View(order);
         }
 
-        // GET: Orders/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-        //    return View();
-        //}
+        //GET: Orders/Create
+        public IActionResult Create()
+        {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserOrderDTO userOrderDTO)
+        public async Task<IActionResult> CreateFromCart(UserOrderDTO userOrderDTO)
         {
             var products = new List<Product>();
             string[] splitProducts = userOrderDTO.ProductIds.Split(',');
@@ -92,6 +96,8 @@ namespace MinmosFoodDelivery.Controllers
             {
                 Total = userOrderDTO.Total,
                 Date = DateTime.Now,
+                DeliveryAddress = userOrderDTO.DeliveryAddress,
+                IsCancelled = userOrderDTO.IsCancelled,
                 User = user,
                 UserId = user.Id,
                 Products = products
@@ -102,22 +108,23 @@ namespace MinmosFoodDelivery.Controllers
             return Ok();
         }
 
-        // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("OrderId,Date,Total,UserId")] Order order)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(order);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
-        //    return View(order);
-        //}
+        //POST: Orders/Create
+        //To protect from overposting attacks, enable the specific properties you want to bind to.
+        //For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("OrderId,Date,Total,UserId,DeliveryAddress,IsCancelled")] Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(All));
+            }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
+            return View(order);
+        }
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -141,7 +148,7 @@ namespace MinmosFoodDelivery.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,Date,Total,UserId")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderId,Date,Total,UserId,DeliveryAddress,IsCancelled")] Order order)
         {
             if (id != order.OrderId)
             {
@@ -166,7 +173,9 @@ namespace MinmosFoodDelivery.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                if (!User.Identity.Name.Contains("xelo"))
+                { return RedirectToAction(nameof(Index)); }
+                return RedirectToAction(nameof(All));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", order.UserId);
             return View(order);
@@ -199,7 +208,7 @@ namespace MinmosFoodDelivery.Controllers
             var order = await _context.Orders.FindAsync(id);
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(All));
         }
 
         private bool OrderExists(int id)

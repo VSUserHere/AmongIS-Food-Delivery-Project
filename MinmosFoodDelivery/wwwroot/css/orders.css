@@ -1,0 +1,47 @@
+﻿body {
+    background-color: #FBD148;
+    /*font-weight: bold;*/
+    /*font-style: oblique;*/
+    /*font-variant-caps: all-small-caps;*/
+}
+
+#title {
+    font-weight: bolder;
+    font-style: oblique;
+    font-size: 72px;
+    font-variant-caps: all-small-caps;
+}
+
+#info {
+    font-style: oblique;
+    font-variant-caps: all-small-caps;
+}
+
+#create, #to-joints, #all-good {
+    font-weight: bolder;
+    font-style: oblique;
+    font-variant-caps: all-small-caps;
+    font-size: 24px;
+    transition: .25s ease-in-out;
+}
+
+    #create:hover,
+    #to-joints:hover,
+    #all-good:hover {
+        color: white;
+    }
+
+#table-head {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: oblique;
+    font-variant-caps: all-small-caps;
+}
+
+#actions {
+    font-weight: bolder;
+    font-style: oblique;
+    font-variant-caps: all-small-caps;
+    font-size: 18px;
+    display: grid;
+}

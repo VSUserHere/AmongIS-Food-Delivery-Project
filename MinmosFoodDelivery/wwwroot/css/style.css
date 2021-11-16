@@ -4,13 +4,16 @@
 
 ::-webkit-scrollbar-track {
     /*baby blue for later use: #A2D2FF;*/
-    background: #FBD148;
-    border-radius: 10px;
+    background: white;
 }
 
 ::-webkit-scrollbar-thumb {
     background: #1F1D36;
     border-radius: 10px;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
 }
 
 .navbar {
@@ -31,3 +34,19 @@ a {
         color: inherit;
         text-decoration: none;
     }
+
+.dot {
+    height: 10px;
+    width: 10px;
+    background-color: #FBD148;
+    border-radius: 50%;
+    margin: 0;
+    justify-self: center;
+    align-self: center;
+}
+
+#header-dot {
+    transition: 0.5s ease-out;
+    opacity: 0;
+    margin-top: 5px;
+}

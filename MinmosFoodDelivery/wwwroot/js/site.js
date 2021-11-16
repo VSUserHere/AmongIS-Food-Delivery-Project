@@ -12,6 +12,6 @@ const sr = ScrollReveal({
     reset: false
 });
 
-sr.reveal('#hunry, #sub, #logo, .text-center, #title, #info, #login-warning, #create, .menu, .cart, #cart-toggle', {
+sr.reveal('#hunry, #sub, #logo, .text-center, #title, #orders, #info, #login-warning, #create, .menu, .cart, #cart-toggle, #to-joints, #all-good', {
     interval: 100
 });

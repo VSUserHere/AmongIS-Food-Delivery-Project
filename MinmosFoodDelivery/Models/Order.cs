@@ -14,11 +14,12 @@ namespace MinmosFoodDelivery.Models
         [Column(TypeName = "decimal(10,2)")]
         public decimal Total { get; set; }
 
+        public string DeliveryAddress { get; set; }
+
+        public bool IsCancelled { get; set; } = false;
+
         public string UserId { get; set; }
         public IdentityUser User { get; set; }
-
-        //TODO??
-        //public bool IsCancelled { get; set; }
 
         public ICollection<Product> Products { get; set; }
     }

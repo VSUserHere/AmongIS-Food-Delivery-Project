@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MinmosFoodDelivery.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MinmosFoodDelivery.Controllers
 {
@@ -21,7 +19,9 @@ namespace MinmosFoodDelivery.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Products.Include(p => p.Restaurant);
+            var appDbContext = _context.Products
+                .Include(p => p.Restaurant)
+                .Include(o => o.Orders);
             return View(await appDbContext.ToListAsync());
         }
 

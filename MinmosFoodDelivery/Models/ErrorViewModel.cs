@@ -1,5 +1,3 @@
-using System;
-
 namespace MinmosFoodDelivery.Models
 {
     public class ErrorViewModel

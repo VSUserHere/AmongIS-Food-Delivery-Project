@@ -1,41 +1,90 @@
 ﻿@model IEnumerable<MinmosFoodDelivery.Models.Order>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Total)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Total)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
-            </td>
-        </tr>
+@{
+    ViewData["Title"] = "All Orders";
 }
-    </tbody>
-</table>
+
+<head>
+    <link rel="stylesheet" href="~/css/orders.css" />
+
+    <script src="~/js/order.js"></script>
+</head>
+
+<h1 id="title">All Orders</h1>
+
+@if (Model.Count() > 0)
+{
+    <div id="create">
+        <a asp-action="Create">Create New</a>
+    </div>
+    <br />
+    <table id="orders" class="table table-borderless table-striped text-center">
+        <thead id="table-head">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsCancelled)
+                </th>
+                <th>
+                    Actions
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliveryAddress)
+                    </td>
+                    @if (item.IsCancelled)
+                    {
+                        <td class="font-weight-bold">
+                            Yes
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="font-weight-bold">
+                            No
+                        </td>
+                    }
+                    <td id="actions">
+                        <a class="text-info font-weight-bold" asp-action="Edit" asp-route-id="@item.OrderId">Edit  </a>
+                        <a class="text-success font-weight-bold" asp-action="Details" asp-route-id="@item.OrderId">Details  </a>
+                        <a class="text-danger font-weight-bold" asp-action="Delete" asp-route-id="@item.OrderId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h5 id="info" class="font-weight-bold"> No orders yet :(</h5>
+    <br />
+    <div id="create">
+        <a asp-action="Create">Create New</a>
+    </div>
+}

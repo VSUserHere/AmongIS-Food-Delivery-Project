@@ -10,7 +10,8 @@
         </li>
         @if (!User.Identity.Name.Contains("xelo"))
         {
-            <li><div class=" nav-link text-dark" id="header-cart">0</div></li>
+            <li><a class="nav-link text-dark" id="header-cart" href="#order-products">0</a></li>
+            <li><div class="dot" id="header-dot"></div></li>
         }
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

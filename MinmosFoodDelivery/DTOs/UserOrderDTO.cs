@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MinmosFoodDelivery.DTOs
 {
@@ -14,5 +10,9 @@ namespace MinmosFoodDelivery.DTOs
 
         [Column(TypeName = "decimal(10,2)")]
         public decimal Total { get; set; }
+
+        public string DeliveryAddress { get; set; }
+
+        public bool IsCancelled { get; set; } = false;
     }
 }

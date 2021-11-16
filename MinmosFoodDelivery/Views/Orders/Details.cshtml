@@ -1,4 +1,8 @@
-﻿@model MinmosFoodDelivery.Models.Order
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model MinmosFoodDelivery.Models.Order
 
 @{
     ViewData["Title"] = "Details";
@@ -23,20 +27,52 @@
             @Html.DisplayFor(model => model.Total)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.DeliveryAddress)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
+            @Html.DisplayFor(model => model.DeliveryAddress)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsCancelled)
+        </dt>
+
+        @if (Model.IsCancelled)
+        {
+            <dd class="col-sm-10">
+                Yes
+            </dd>
+        }
+        else
+        {
+            <dd class="col-sm-10">
+                No
+            </dd>
+        }
+        @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.User)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.User.Id)
+            </dd>
+        }
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Products)
         </dt>
         <dd class="col-sm-10">
-
+            TODO
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.OrderId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.OrderId">Edit |</a>
+        <a asp-action="All">Back to List</a>
+    }
+    else
+    {
+        <a asp-action="Index">Back to List</a>
+    }
 </div>
