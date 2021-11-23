@@ -5,6 +5,10 @@
 
 //$("#5").css("animation", "hue-shift 2.5s ease-in-out infinite");
 
+$(window).on("load", function () {
+    $(".loader-wrap").fadeOut("slow");
+});
+
 const sr = ScrollReveal({
     origin: 'bottom',
     distance: '45px',
@@ -12,6 +16,6 @@ const sr = ScrollReveal({
     reset: false
 });
 
-sr.reveal('#hunry, #sub, #logo, .text-center, #title, #orders, #info, #login-warning, #create, .menu, .cart, #cart-toggle, #to-joints, #all-good', {
+sr.reveal('#hunry, #sub, #logo, .text-center, #title, #sub-title, #orders, #info, #login-warning, #create, .menu, .cart, #cart-toggle, #to-joints, #all-good, #login-email, #login-password, #login-button, #login-remember, #login-actions', {
     interval: 100
 });

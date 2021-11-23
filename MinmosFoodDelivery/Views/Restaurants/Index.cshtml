@@ -54,7 +54,16 @@
                             </h5>
                         </div>
                         <div class="item-image">
-                            <img src="~/css/Resources/joint.svg" alt="joint" />
+                            @if (item.ImageUrl == null)
+                            {
+                                <img src="~/css/Resources/joint.svg" alt="joint" />
+                            }
+                            else
+                            {
+                                <div class="item-clip-wrap">
+                                    <img src="~/css/Resources/@item.ImageUrl" class="image-clip" alt="joint" />
+                                </div>
+                            }
                         </div>
                     </div>
                     <div class="item-back">

@@ -1,0 +1,33 @@
+﻿body {
+    background-color: #FBD148;
+}
+
+label {
+    font-weight: bolder;
+    font-variant-caps: all-petite-caps;
+    font-style: oblique;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    border: 3px solid white;
+    background: white;
+    border-radius: 100%;
+    outline: none;
+}
+
+#title,
+#sub-title {
+    font-weight: bolder;
+    font-variant-caps: all-petite-caps;
+    font-style: oblique;
+}
+
+#sub-title {
+    font-size: 24px;
+}
+
+#login-actions {
+    font-weight: bold;
+}

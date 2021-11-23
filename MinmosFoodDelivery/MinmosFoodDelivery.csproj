@@ -30,11 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <None Include="Properties\serviceDependencies.local.json.user" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Properties\serviceDependencies.local.json.user" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

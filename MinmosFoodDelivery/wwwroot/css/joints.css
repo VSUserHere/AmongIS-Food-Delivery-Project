@@ -119,10 +119,22 @@
 }
 
 .item-image {
-    width: 75%;
+    width: 75% !important;
+    height: auto !important;
     position: absolute;
     bottom: 0;
     margin-bottom: 25px;
+}
+
+.item-clip-wrap {
+    clip-path: circle();
+    height: 140px;
+}
+
+.image-clip {
+    width: 225px;
+    height: auto;
+    margin-left: -37px;
 }
 
 #name {
