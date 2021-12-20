@@ -6,10 +6,6 @@
     user-select: none;
 }
 
-/*::selection {
-    background: #A2D2FF;
-}*/
-
 .item-back ::-webkit-scrollbar-track {
     border-radius: 100%;
     background: #FBD148;
@@ -177,7 +173,6 @@
 }
 
 #login, #buy, #order-products, .remove-product {
-    /* animation: hue-shift 2s ease-in-out infinite;*/
     background-color: #A2D2FF;
     border-radius: 20px;
     width: 75%;

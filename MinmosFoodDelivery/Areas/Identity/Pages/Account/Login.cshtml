@@ -9,26 +9,26 @@
     <link rel="stylesheet" href="~/css/identity.css" />
 </head>
 
-<h1 id="title">@ViewData["Title"]</h1>
+<h1 class="title">@ViewData["Title"]</h1>
 <div class="row">
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h4 id="sub-title">Use a local account to log in.</h4>
+                <h4 class="sub-title">Use a local account to log in.</h4>
                 @*<div class="divider"></div>*@
                 <br />
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div id="login-email" class="form-group">
+                <div class="form-group login-email">
                     <label asp-for="Input.Email"></label>
                     <input asp-for="Input.Email" class="form-control rounded-pill border-0 box-shadow-rounded font-weight-bold" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                <div id="login-password" class="form-group">
+                <div class="form-group login-password">
                     <label asp-for="Input.Password"></label>
                     <input asp-for="Input.Password" class="form-control rounded-pill border-0 box-shadow-rounded font-weight-bold" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div class="form-group" id="login-remember">
+                <div class="form-group login-remember">
                     @*<div class="checkbox">
                             <label asp-for="Input.RememberMe">
                                 <input asp-for="Input.RememberMe" />
@@ -40,8 +40,8 @@
                         <label asp-for="Input.RememberMe" class="custom-control-label" for="customSwitch1">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
                     </div>
                 </div>
-                <div class="form-group" id="login-button">
-                    <button type="submit" class="btn btn-primary rounded-pill">Login</button>
+                <div class="form-group login-button">
+                    <button type="submit" class="btn btn-primary rounded-pill box-shadow-rounded">Login</button>
                 </div>
                 <br />
                 <div class="form-group" id="login-actions">

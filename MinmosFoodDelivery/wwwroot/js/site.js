@@ -16,6 +16,6 @@ const sr = ScrollReveal({
     reset: false
 });
 
-sr.reveal('#hunry, #sub, #logo, .text-center, #title, #sub-title, #orders, #info, #login-warning, #create, .menu, .cart, #cart-toggle, #to-joints, #all-good, #login-email, #login-password, #login-button, #login-remember, #login-actions', {
+sr.reveal('#hunry, #sub, #logo, .text-center, #title, #sub-title, .title, .sub-title, #orders, #info, #login-warning, #create, .menu, .cart, #cart-toggle, #to-joints, #all-good, .login-email, .login-password, .login-re-password, .login-button, .login-remember, #login-actions', {
     interval: 100
 });

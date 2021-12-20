@@ -17,14 +17,14 @@ label {
     outline: none;
 }
 
-#title,
-#sub-title {
+.title,
+.sub-title {
     font-weight: bolder;
     font-variant-caps: all-petite-caps;
     font-style: oblique;
 }
 
-#sub-title {
+.sub-title {
     font-size: 24px;
 }
 
