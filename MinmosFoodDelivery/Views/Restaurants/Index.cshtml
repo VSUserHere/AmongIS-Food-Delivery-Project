@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
     {
         <h1 id="title">Food Joints</h1>
         <h5 id="info"> Hover above a joint for the menu.</h5>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="item-back">
-                        @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <div class="item-list-admin">
                                 @foreach (var product in item.Products)
@@ -146,7 +146,7 @@
         }
     </div>
     <br />
-    @if (SignInManager.IsSignedIn(User) && !User.Identity.Name.Contains("xelo"))
+    @if (SignInManager.IsSignedIn(User) && !User.IsInRole("Admin"))
     {
         <div class="cart container-fluid box-shadow-rounded" id="cart-toggle">
             <div id="order-title">

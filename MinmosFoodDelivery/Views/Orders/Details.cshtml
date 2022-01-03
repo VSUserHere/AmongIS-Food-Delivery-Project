@@ -48,7 +48,7 @@
                 No
             </dd>
         }
-        @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
         {
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.User)
@@ -60,7 +60,7 @@
     </dl>
 </div>
 <div>
-    @if (SignInManager.IsSignedIn(User) && User.Identity.Name.Contains("xelo"))
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
     {
         <a asp-action="Edit" asp-route-id="@Model.OrderId">Edit |</a>
         <a asp-action="All">Back to List</a>

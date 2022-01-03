@@ -173,7 +173,7 @@ namespace MinmosFoodDelivery.Controllers
                         throw;
                     }
                 }
-                if (!User.Identity.Name.Contains("xelo"))
+                if (!User.IsInRole("Admin"))
                 { return RedirectToAction(nameof(Index)); }
                 return RedirectToAction(nameof(All));
             }

@@ -8,7 +8,7 @@
         <li class="nav-item">
             <a class="nav-link text-dark" id="user-name" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity.Name.Substring(0, User.Identity.Name.IndexOf('@'))!</a>
         </li>
-        @if (!User.Identity.Name.Contains("xelo"))
+        @if (!User.IsInRole("Admin"))
         {
             <li><a class="nav-link text-dark" id="header-cart" href="#order-products">0</a></li>
             <li><div class="dot" id="header-dot"></div></li>

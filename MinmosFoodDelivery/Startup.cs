@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MinmosFoodDelivery.Controllers;
 using MinmosFoodDelivery.Models;
 
 namespace MinmosFoodDelivery
@@ -25,12 +26,14 @@ namespace MinmosFoodDelivery
             //services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>()
                 .AddEntityFrameworkStores<AppDbContext>();
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -50,6 +53,9 @@ namespace MinmosFoodDelivery
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            var task = RoleController.InitializeAsync(roleManager);
+            task.Wait();
 
             app.UseEndpoints(endpoints =>
             {
